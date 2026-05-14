@@ -7,17 +7,13 @@ Skrypt działa na Windows i korzysta z **FFmpeg** oraz **FFprobe**.
 
 Umieść pliki tak:
 
-📂 folder_z_programem
- ├── kompresor.bat
- ├── ffmpeg.exe
- ├── ffprobe.exe
- ├── 📂 do_kompresji
- └── 📂 kompress_10mb   (tworzy się automatycznie)
+<img width="455" height="160" alt="4498msedge_GaZHN5TFYt" src="https://github.com/user-attachments/assets/3dbb4281-1972-47ef-b507-c9fad1284191" />
 
 ## ⚙️ Konfiguracja
 
-W górnej części skryptu
-np. set "MAXSIZE=10485760"
+W górnej części skryptu:
+
+set "MAXSIZE=10485760"
 
 set "OPEN_OUTPUT=1" 
 1 → otworzy folder po zakończeniu
