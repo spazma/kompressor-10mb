@@ -28,3 +28,5 @@ https://ffmpeg.org/download.html
 
 ✔️ Licencja
 Skrypt jest darmowy — możesz go dowolnie modyfikować i używać
+
+<img width="921" height="328" alt="4500cmd_EFJmCbbv1H" src="https://github.com/user-attachments/assets/f73eb59d-8c95-46c5-9280-7d83150ccd9a" />
