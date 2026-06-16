@@ -13,7 +13,7 @@ Umieść pliki tak:
 
 W górnej części skryptu:
 
-set "MAXSIZE=10485760"
+set "MAXSIZE=10000000"
 
 set "OPEN_OUTPUT=1" 
 1 → otworzy folder po zakończeniu
