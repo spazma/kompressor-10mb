@@ -5,7 +5,7 @@ do maksymalnie **10 MB**, automatycznie dobierając bitrate na podstawie długo�
 
 Skrypt działa na Windows i korzysta z **FFmpeg** oraz **FFprobe**.
 
-Wykrywa NVENC 2-Pass fallback na CPU (libx264) 2-Pass
+Wykrywa NVENC fallback na CPU (libx264)
 
 Umieść pliki tak:
 
