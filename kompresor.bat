@@ -24,6 +24,12 @@ if not exist "%INPUT_DIR%" mkdir "%INPUT_DIR%"
 if not exist "%OUTPUT_DIR%" mkdir "%OUTPUT_DIR%"
 
 REM ===========================================
+REM   CZYSZCZENIE STARYCH PLIKOW LOGA
+REM ===========================================
+if exist "ffmpeg2pass-0.log" del "ffmpeg2pass-0.log"
+if exist "ffmpeg2pass-0.log.mbtree" del "ffmpeg2pass-0.log.mbtree"
+
+REM ===========================================
 REM   SPRAWDZENIE GPU / NVIDIA DRIVER
 REM ===========================================
 echo %ESC%[93m[*] Sprawdzam dostepnosc GPU...%ESC%[0m
@@ -158,9 +164,20 @@ if !errorlevel! equ 0 (
             echo %ESC%[91m[WARN] !FILESIZE_MB! MB - za duzo%ESC%[0m
         )
     )
+    
+    REM ===========================================
+    REM   USUWANIE PLIKOW LOGA - SUKCES
+    REM ===========================================
+    if exist "ffmpeg2pass-0.log" del "ffmpeg2pass-0.log"
+    if exist "ffmpeg2pass-0.log.mbtree" del "ffmpeg2pass-0.log.mbtree"
 ) else (
     set /a FAILED+=1
     echo %ESC%[91m[BLAD]%ESC%[0m
+    
+    REM ===========================================
+    REM   ZACHOWANIE PLIKOW LOGA - ERROR
+    REM ===========================================
+    echo %ESC%[93mLogi bledu zapisane w katalogu biezacym do debugowania%ESC%[0m
 )
 
 echo.
