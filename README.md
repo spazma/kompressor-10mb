@@ -5,7 +5,7 @@ do maksymalnie **10 MB**, automatycznie dobierając bitrate na podstawie długo�
 
 Skrypt działa na Windows i korzysta z **FFmpeg** oraz **FFprobe**.
 
-Wykrywa NVENC jak brak leci na CPU (libx264) :)
+Wykrywa NVENC jak brak lecimy na CPU (libx264) :)
 
 Umieść pliki tak:
 
@@ -31,4 +31,5 @@ https://ffmpeg.org/download.html
 ✔️ Licencja
 Skrypt jest darmowy — możesz go dowolnie modyfikować i używać
 
-<img width="921" height="328" alt="4500cmd_EFJmCbbv1H" src="https://github.com/user-attachments/assets/f73eb59d-8c95-46c5-9280-7d83150ccd9a" />
+<img width="944" height="600" alt="4833cmd_qJC9RZsZZT" src="https://github.com/user-attachments/assets/f9df2a44-2af4-4614-b973-eb4a85e115ad" />
+
