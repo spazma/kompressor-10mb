@@ -70,9 +70,18 @@ REM ===========================================
 set PROCESSED=0
 set FAILED=0
 
-for %%F in ("%INPUT_DIR%\*.mp4") do if exist "%%~F" call :process "%%~F"
-for %%F in ("%INPUT_DIR%\*.mov") do if exist "%%~F" call :process "%%~F"
-for %%F in ("%INPUT_DIR%\*.mkv") do if exist "%%~F" call :process "%%~F"
+for %%F in ("%INPUT_DIR%\*.mp4") do if exist "%%~F" (
+    call :process "%%~F"
+    set /a PROCESSED=!PROCESSED!
+)
+for %%F in ("%INPUT_DIR%\*.mov") do if exist "%%~F" (
+    call :process "%%~F"
+    set /a PROCESSED=!PROCESSED!
+)
+for %%F in ("%INPUT_DIR%\*.mkv") do if exist "%%~F" (
+    call :process "%%~F"
+    set /a PROCESSED=!PROCESSED!
+)
 
 echo.
 echo %ESC%[96m============================================
@@ -131,18 +140,24 @@ REM ===========================================
 REM   FFMPEG - 2-PASS ENCODING
 REM ===========================================
 
+set ENCODE_OK=0
+
 if %USE_GPU% equ 1 (
     echo %ESC%[93m[*] Pass 1/2 ^(GPU HEVC^)...%ESC%[0m
     ffmpeg -hide_banner -loglevel error -stats -i "!FILE!" -c:v hevc_nvenc -rc vbr -cq 23 -b:v !BITRATE_TARGET!k -maxrate !BITRATE_TARGET!k -pass 1 -an -f null nul
     echo %ESC%[93m[*] Pass 2/2 ^(GPU HEVC^)...%ESC%[0m
     ffmpeg -hide_banner -loglevel error -stats -i "!FILE!" -c:v hevc_nvenc -rc vbr -cq 23 -b:v !BITRATE_TARGET!k -maxrate !BITRATE_TARGET!k -c:a aac -b:a 64k -pass 2 "!OUTPUT_DIR!\!OUTNAME!"
     
-    if exist "!OUTPUT_DIR!\!OUTNAME!" (
-        for %%Z in ("!OUTPUT_DIR!\!OUTNAME!") do set "FILESIZE=%%~zZ"
-        if !FILESIZE! equ 0 (
-            echo %ESC%[91m[!] Plik 0 bajtow - kasuje i uzywam CPU...%ESC%[0m
-            del "!OUTPUT_DIR!\!OUTNAME!"
-            goto cpu_encode
+    if !errorlevel! equ 0 (
+        if exist "!OUTPUT_DIR!\!OUTNAME!" (
+            for %%Z in ("!OUTPUT_DIR!\!OUTNAME!") do set "FILESIZE=%%~zZ"
+            if !FILESIZE! gtr 0 (
+                set ENCODE_OK=1
+            ) else (
+                echo %ESC%[91m[!] Plik 0 bajtow - kasuje i uzywam CPU...%ESC%[0m
+                del "!OUTPUT_DIR!\!OUTNAME!"
+                goto cpu_encode
+            )
         )
     )
 ) else (
@@ -154,7 +169,10 @@ if %USE_GPU% equ 1 (
 )
 
 if !errorlevel! equ 0 (
-    set /a PROCESSED+=1
+    set ENCODE_OK=1
+)
+
+if !ENCODE_OK! equ 1 (
     for %%Z in ("!OUTPUT_DIR!\!OUTNAME!") do (
         set "FILESIZE=%%~zZ"
         set /a FILESIZE_MB=!FILESIZE! / 1048576
@@ -170,6 +188,9 @@ if !errorlevel! equ 0 (
     REM ===========================================
     if exist "ffmpeg2pass-0.log" del "ffmpeg2pass-0.log"
     if exist "ffmpeg2pass-0.log.mbtree" del "ffmpeg2pass-0.log.mbtree"
+    
+    endlocal
+    set /a PROCESSED+=1
 ) else (
     set /a FAILED+=1
     echo %ESC%[91m[BLAD]%ESC%[0m
@@ -178,8 +199,8 @@ if !errorlevel! equ 0 (
     REM   ZACHOWANIE PLIKOW LOGA - ERROR
     REM ===========================================
     echo %ESC%[93mLogi bledu zapisane w katalogu biezacym do debugowania%ESC%[0m
+    endlocal
 )
 
 echo.
-endlocal
 goto :eof
