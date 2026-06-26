@@ -31,4 +31,5 @@ https://ffmpeg.org/download.html
 ✔️ Licencja
 Skrypt jest darmowy — możesz go dowolnie modyfikować i używać
 
-<img width="929" height="612" alt="4835explorer_baKecebPOT" src="https://github.com/user-attachments/assets/3feaf278-06dc-4a18-8032-79e265d52358" />
+<img width="992" height="642" alt="kompressor-10mb" src="https://github.com/user-attachments/assets/cc259ac3-4301-4c66-8149-d9747802c3f4" />
+
