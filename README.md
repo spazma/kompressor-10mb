@@ -31,5 +31,4 @@ https://ffmpeg.org/download.html
 ✔️ Licencja
 Skrypt jest darmowy — możesz go dowolnie modyfikować i używać
 
-<img width="944" height="600" alt="4833cmd_qJC9RZsZZT" src="https://github.com/user-attachments/assets/f9df2a44-2af4-4614-b973-eb4a85e115ad" />
-
+<img width="929" height="612" alt="4835explorer_baKecebPOT" src="https://github.com/user-attachments/assets/3feaf278-06dc-4a18-8032-79e265d52358" />
