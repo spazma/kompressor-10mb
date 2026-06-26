@@ -143,9 +143,10 @@ REM ===========================================
 set ENCODE_OK=0
 
 if %USE_GPU% equ 1 (
-    echo %ESC%[93m[*] Pass 1/2 ^(GPU HEVC^)...%ESC%[0m
+    echo Pass 1/2 ^(GPU HEVC^)...
     ffmpeg -hide_banner -loglevel error -stats -i "!FILE!" -c:v hevc_nvenc -rc vbr -cq 23 -b:v !BITRATE_TARGET!k -maxrate !BITRATE_TARGET!k -pass 1 -an -f null nul
-    echo %ESC%[93m[*] Pass 2/2 ^(GPU HEVC^)...%ESC%[0m
+    echo .
+    echo Pass 2/2 ^(GPU HEVC^)...
     ffmpeg -hide_banner -loglevel error -stats -i "!FILE!" -c:v hevc_nvenc -rc vbr -cq 23 -b:v !BITRATE_TARGET!k -maxrate !BITRATE_TARGET!k -c:a aac -b:a 64k -pass 2 "!OUTPUT_DIR!\!OUTNAME!"
     
     if !errorlevel! equ 0 (
@@ -162,9 +163,10 @@ if %USE_GPU% equ 1 (
     )
 ) else (
     :cpu_encode
-    echo %ESC%[93m[*] Pass 1/2 ^(CPU libx264^)...%ESC%[0m
+    echo Pass 1/2 ^(CPU libx264^)...
     ffmpeg -hide_banner -loglevel error -stats -i "!FILE!" -c:v libx264 -crf 28 -b:v !BITRATE_TARGET!k -maxrate !BITRATE_TARGET!k -pass 1 -an -f null nul
-    echo %ESC%[93m[*] Pass 2/2 ^(CPU libx264^)...%ESC%[0m
+    echo.
+    echo Pass 2/2 ^(CPU libx264^)...
     ffmpeg -hide_banner -loglevel error -stats -i "!FILE!" -c:v libx264 -crf 28 -b:v !BITRATE_TARGET!k -maxrate !BITRATE_TARGET!k -c:a aac -b:a 32k -pass 2 "!OUTPUT_DIR!\!OUTNAME!"
 )
 
